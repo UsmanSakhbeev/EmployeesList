@@ -1,0 +1,15 @@
+﻿<Window x:Class="EmployeeList.DepartmentChangeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeList"
+        mc:Ignorable="d"
+        Title="DepartmentChangeWindow" Height="350" Width="400">
+    <Grid>
+        <TextBlock Margin="30" HorizontalAlignment="Center">Department</TextBlock>
+        <TextBox x:Name="DepartmentInput" Margin="0,55,0,0" Height="20" Width="200" VerticalAlignment="Top"></TextBox>
+        <Button Margin="40,0,0,10" Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="ChangeDepartment_Click">Change Department</Button>
+        <Button Margin="0,0,40,10" Height="25" Width="120" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="DeleteDepartment_Click">Delete Department</Button>
+    </Grid>
+</Window>
