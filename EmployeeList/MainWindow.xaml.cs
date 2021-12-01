@@ -1,7 +1,12 @@
 ﻿using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
+using System.Windows.Controls;
 using System;
 using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Data;
+using System.Windows;
 
 namespace EmployeeList
 {
@@ -23,8 +28,8 @@ namespace EmployeeList
         {
             lbDepartment.ItemsSource = departments;
             lbEmployee.ItemsSource = employees;
+            this.DataContext = this;
             employees.Add(new Employee("Ilshat", "Safin", 1, null, 1));
-
         }
         private void lbEmployee_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -72,13 +77,10 @@ namespace EmployeeList
                 employeeChangeWindow.Show();
                 employeeChangeWindow.Closed += (_, __) =>
                 {
-                    lbEmployee.Items.Refresh();
+                    //lbEmployee.Items.Refresh();
                     _selectedEmployee = null;
                     lbEmployee.UnselectAll();
                 };
-
-
-
             }
             if (_selectedDepartment != null)
             {
@@ -87,13 +89,26 @@ namespace EmployeeList
                 departmentChangeWindow.Show();
                 departmentChangeWindow.Closed += (_, __) =>
                 {
-                    lbDepartment.Items.Refresh();
+                    //lbDepartment.Items.Refresh();
                     _selectedDepartment = null;
                     lbDepartment.UnselectAll();
                 };
-
-
             }
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string createExpression = @"CREATE TABLE[dbo].[EmployeesTable]([Id]	INT IDENTITY(1,1) NOT NULL,
+							  [Name] NVARCHAR(MAX) NOT NULL,
+							  [Surname] NVARCHAR(MAX) NOT NULL,
+							  [Department] NVARCHAR(MAX) NULL,
+							  [Salary] INT NULL,
+							  CONSTRAINT[PK_dbo.EmployeesTable] PRIMARY KEY CLUSTERED ([Id] Asc));";
+            string connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial catalog = EmployeesListDB; Integrated Security = True";
+            //string connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial catalog = EmployeesListDB; Integrated Security = True";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            Console.WriteLine("connection checking");
+            connection.Close();
         }
     }
 }

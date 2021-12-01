@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="520">
+        Title="MainWindow" Loaded="Window_Loaded" Height="450" Width="520">
     <Grid>
         <TabControl>
             <TabItem x:Name="EmployeesTab">
@@ -15,14 +15,14 @@
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <ListView Margin="10" Name="lbEmployee" SelectionMode="Single" SelectionChanged="lbEmployee_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Center" Height="300" Width="465">
+                    <ListView Margin="10" x:Name="lbEmployee" SelectionMode="Single" SelectionChanged="lbEmployee_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Center" Height="300" Width="465">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path = Name}" Width="92">Name</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path = Surname}" Width="92">Surname</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path = ID}" Width="92">ID</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path = Department}" Width="92">Department</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path = Salary}" Width="92">Salary</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="92">Name</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Surname}" Width="92">Surname</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="92">ID</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Department}" Width="92">Department</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Salary}" Width="92">Salary</GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -38,7 +38,7 @@
                     <ListView Margin="10" Name="lbDepartment" SelectionMode="Single" SelectionChanged="lbDepartment_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Center" Height="300" Width="465">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="100">Department</GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path = Name}" Width="100">Department</GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -47,6 +47,18 @@
         </TabControl>
         <Button Margin="10" Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="AddEmployee_Click">Add Employee</Button>
         <Button Margin="10" Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="AddDepartment_Click">Add Department</Button>
-        <Button Margin="10" Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ChangeSelected_Click">Change Selected</Button>
+        <Button Margin="10" Height="30" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="ChangeSelected_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Gray"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            Change Selected
+        </Button>
     </Grid>
 </Window>

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace EmployeeList
 {
-    public class Department
+    public class Department : INotifyPropertyChanged
     {
         private string _name;
 
@@ -15,7 +11,11 @@ namespace EmployeeList
             get => _name;
             set
             {
-                _name = value;
+                if (this._name != value)
+                {
+                    _name = value;
+                    this.NotifyPropertyChanged("Name");
+                }
             }
         }
         public Department(string name)
@@ -26,6 +26,11 @@ namespace EmployeeList
         {
             return $"{Name}";
         }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
     }
 }
