@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="520">
+        Title="MainWindow" Loaded="Window_Loaded" Height="450" Width="520">
     <Grid>
         <TabControl>
             <TabItem x:Name="EmployeesTab">
